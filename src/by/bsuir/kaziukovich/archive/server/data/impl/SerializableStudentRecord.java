@@ -1,11 +1,12 @@
 package by.bsuir.kaziukovich.archive.server.data.impl;
 
 import by.bsuir.kaziukovich.archive.domain.StudentRecord;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
-public class SerializableStudentRecord implements StudentRecord {
+public class SerializableStudentRecord implements StudentRecord, Serializable {
     private int group;
 
     private String name;
@@ -88,7 +89,7 @@ public class SerializableStudentRecord implements StudentRecord {
                 + address + ", dateOfBirth: " + dateOfBirth;
     }
 
-    public SerializableStudentRecord(int group, String name, String surname, String address, Date dateOfBirth) {
+    SerializableStudentRecord(int group, String name, String surname, String address, Date dateOfBirth) {
         if ((name == null) || (surname == null) || (address == null) || (dateOfBirth == null)) {
             throw new IllegalArgumentException("Arguments shouldn't be null");
         }
@@ -110,7 +111,7 @@ public class SerializableStudentRecord implements StudentRecord {
         }
     }
 
-    public SerializableStudentRecord(StudentRecord record) {
+    SerializableStudentRecord(StudentRecord record) {
         this(record.getGroup(), record.getName(), record.getSurname(), record.getAddress(), record.getDateOfBirth());
     }
 }
