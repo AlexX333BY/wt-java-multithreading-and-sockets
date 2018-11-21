@@ -15,7 +15,7 @@ public class AccountDao implements by.bsuir.kaziukovich.archive.server.dataacces
 
     private String path;
 
-    private final Object accountsModifySync = new Object();
+    private final Object accountsModifySync;
 
     @Override
     public Account get(String username) throws DaoException {
@@ -180,5 +180,6 @@ public class AccountDao implements by.bsuir.kaziukovich.archive.server.dataacces
     public AccountDao() {
         path = null;
         accounts = new ArrayList<>();
+        accountsModifySync = new Object();
     }
 }
