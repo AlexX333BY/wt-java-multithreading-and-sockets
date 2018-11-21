@@ -2,7 +2,7 @@ package by.bsuir.kaziukovich.archive.server.data.impl;
 
 import by.bsuir.kaziukovich.archive.domain.StudentRecord;
 import by.bsuir.kaziukovich.archive.server.data.RecordReadWriteException;
-import by.bsuir.kaziukovich.archive.server.data.UserRecordReaderWriter;
+import by.bsuir.kaziukovich.archive.server.data.StudentRecordReaderWriter;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.FileInputStream;
@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentRecordXmlFileReaderWriter implements UserRecordReaderWriter<StudentRecord> {
+public class StudentRecordXmlFileReaderWriter implements StudentRecordReaderWriter {
     @Override
     public List<StudentRecord> readFrom(String path) throws RecordReadWriteException {
         if (path == null) {
