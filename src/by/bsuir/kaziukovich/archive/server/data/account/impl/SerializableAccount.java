@@ -1,7 +1,7 @@
 package by.bsuir.kaziukovich.archive.server.data.account.impl;
 
-import by.bsuir.kaziukovich.archive.domain.Account;
-import by.bsuir.kaziukovich.archive.domain.UserRole;
+import by.bsuir.kaziukovich.archive.domain.account.Account;
+import by.bsuir.kaziukovich.archive.domain.account.UserRole;
 import java.io.Serializable;
 import java.util.Objects;
 

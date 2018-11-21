@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.domain;
+package by.bsuir.kaziukovich.archive.domain.record;
 
 import java.util.Date;
 

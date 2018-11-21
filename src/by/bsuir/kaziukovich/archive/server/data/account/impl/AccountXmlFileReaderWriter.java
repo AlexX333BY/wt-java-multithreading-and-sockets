@@ -1,6 +1,6 @@
 package by.bsuir.kaziukovich.archive.server.data.account.impl;
 
-import by.bsuir.kaziukovich.archive.domain.Account;
+import by.bsuir.kaziukovich.archive.domain.account.Account;
 import by.bsuir.kaziukovich.archive.server.data.ReadWriteException;
 import by.bsuir.kaziukovich.archive.server.data.account.AccountReaderWriter;
 import java.beans.XMLDecoder;

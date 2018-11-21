@@ -1,6 +1,6 @@
 package by.bsuir.kaziukovich.archive.server.data.record.impl;
 
-import by.bsuir.kaziukovich.archive.domain.StudentRecord;
+import by.bsuir.kaziukovich.archive.domain.record.StudentRecord;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
