@@ -1,6 +1,7 @@
 package by.bsuir.kaziukovich.archive.server.dataaccess.account.impl;
 
 import by.bsuir.kaziukovich.archive.domain.account.Account;
+import by.bsuir.kaziukovich.archive.domain.account.AccountFactory;
 import by.bsuir.kaziukovich.archive.domain.account.UserRole;
 import by.bsuir.kaziukovich.archive.server.data.ReadWriteException;
 import by.bsuir.kaziukovich.archive.server.data.account.AccountReaderWriterFactory;
@@ -105,9 +106,7 @@ public class AccountDao implements by.bsuir.kaziukovich.archive.server.dataacces
                     throw new DaoException("User " + trimmedUsername + " already exists");
                 }
             }
-
-            accounts.add(new by.bsuir.kaziukovich.archive.server.dataaccess.account.impl.Account(trimmedUsername,
-                    trimmedPasswordHash, role));
+            accounts.add(AccountFactory.createAccount(trimmedUsername, trimmedPasswordHash, role));
         }
     }
 

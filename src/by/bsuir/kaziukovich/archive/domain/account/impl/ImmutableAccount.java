@@ -1,9 +1,9 @@
-package by.bsuir.kaziukovich.archive.server.dataaccess.account.impl;
+package by.bsuir.kaziukovich.archive.domain.account.impl;
 
 import by.bsuir.kaziukovich.archive.domain.account.UserRole;
 import java.util.Objects;
 
-public class Account implements by.bsuir.kaziukovich.archive.domain.account.Account {
+public class ImmutableAccount implements by.bsuir.kaziukovich.archive.domain.account.Account {
     private final String username;
 
     private final String passwordHash;
@@ -27,7 +27,7 @@ public class Account implements by.bsuir.kaziukovich.archive.domain.account.Acco
 
     @Override
     public boolean equals(Object o) {
-        Account toCompare;
+        ImmutableAccount toCompare;
 
         if (this == o) {
             return true;
@@ -36,7 +36,7 @@ public class Account implements by.bsuir.kaziukovich.archive.domain.account.Acco
             return false;
         }
 
-        toCompare = (Account) o;
+        toCompare = (ImmutableAccount) o;
         return Objects.equals(username, toCompare.username) && Objects.equals(passwordHash, toCompare.passwordHash) &&
                 role == toCompare.role;
     }
@@ -51,7 +51,7 @@ public class Account implements by.bsuir.kaziukovich.archive.domain.account.Acco
         return getClass().getName() + "@username: " + username + ", passwordHash: " + passwordHash + ", role: " + role;
     }
 
-    public Account(String username, String passwordHash, UserRole role) {
+    public ImmutableAccount(String username, String passwordHash, UserRole role) {
         if ((username == null) || (passwordHash == null) || (role == null)) {
             throw new IllegalArgumentException("Arguments shouldn't be null");
         }
