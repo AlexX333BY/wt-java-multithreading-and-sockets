@@ -1,9 +1,8 @@
 package by.bsuir.kaziukovich.archive.server.data.record.impl;
 
 import by.bsuir.kaziukovich.archive.domain.StudentRecord;
-import by.bsuir.kaziukovich.archive.server.data.record.RecordReadWriteException;
+import by.bsuir.kaziukovich.archive.server.data.RecordReadWriteException;
 import by.bsuir.kaziukovich.archive.server.data.record.StudentRecordReaderWriter;
-
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.FileInputStream;

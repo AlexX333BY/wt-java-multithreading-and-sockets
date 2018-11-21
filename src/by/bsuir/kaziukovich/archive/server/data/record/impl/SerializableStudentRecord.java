@@ -114,4 +114,6 @@ public class SerializableStudentRecord implements StudentRecord, Serializable {
     SerializableStudentRecord(StudentRecord record) {
         this(record.getGroup(), record.getName(), record.getSurname(), record.getAddress(), record.getDateOfBirth());
     }
+
+    public SerializableStudentRecord() { }
 }
