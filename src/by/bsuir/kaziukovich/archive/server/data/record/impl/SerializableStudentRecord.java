@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.server.data.impl;
+package by.bsuir.kaziukovich.archive.server.data.record.impl;
 
 import by.bsuir.kaziukovich.archive.domain.StudentRecord;
 import java.io.Serializable;

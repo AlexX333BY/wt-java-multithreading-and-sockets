@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.server.data;
+package by.bsuir.kaziukovich.archive.server.data.record;
 
 public class RecordReadWriteException extends Exception {
     public RecordReadWriteException(String message, Throwable cause) {

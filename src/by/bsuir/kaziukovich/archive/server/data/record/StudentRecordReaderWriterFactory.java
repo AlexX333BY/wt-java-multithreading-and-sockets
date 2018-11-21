@@ -1,6 +1,6 @@
-package by.bsuir.kaziukovich.archive.server.data;
+package by.bsuir.kaziukovich.archive.server.data.record;
 
-import by.bsuir.kaziukovich.archive.server.data.impl.StudentRecordXmlFileReaderWriter;
+import by.bsuir.kaziukovich.archive.server.data.record.impl.StudentRecordXmlFileReaderWriter;
 
 public class StudentRecordReaderWriterFactory {
     private static final StudentRecordReaderWriter readerWriter = new StudentRecordXmlFileReaderWriter();
