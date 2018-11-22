@@ -6,8 +6,8 @@ import by.bsuir.kaziukovich.archive.server.dataaccess.account.AccountDaoFactory;
 import by.bsuir.kaziukovich.archive.server.logic.command.Command;
 import by.bsuir.kaziukovich.archive.server.logic.command.CommandException;
 
-public class AddAccountCommand implements Command {
-    private static final byte REQUIRED_ARGUMENTS_COUNT = 2;
+public class UpdateAccountCommand implements Command {
+    private static final byte REQUIRED_ARGUMENTS_COUNT = 3;
 
     @Override
     public String[] execute(String[] request) throws CommandException {
@@ -16,10 +16,10 @@ public class AddAccountCommand implements Command {
         }
 
         try {
-            AccountDaoFactory.getDao().add(request[0], request[1], UserRole.USER);
+            AccountDaoFactory.getDao().update(request[0], request[1], UserRole.valueOf(request[3]));
             return null;
         } catch (DaoException e) {
-            throw new CommandException("Error adding new account " + request[0], e);
+            throw new CommandException("Error updating account " + request[0], e);
         }
     }
 
