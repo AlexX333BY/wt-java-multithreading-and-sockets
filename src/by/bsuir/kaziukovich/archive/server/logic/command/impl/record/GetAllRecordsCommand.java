@@ -1,8 +1,8 @@
-package by.bsuir.kaziukovich.archive.server.command.impl.record;
+package by.bsuir.kaziukovich.archive.server.logic.command.impl.record;
 
 import by.bsuir.kaziukovich.archive.domain.record.StudentRecord;
-import by.bsuir.kaziukovich.archive.server.command.Command;
-import by.bsuir.kaziukovich.archive.server.command.CommandException;
+import by.bsuir.kaziukovich.archive.server.logic.command.Command;
+import by.bsuir.kaziukovich.archive.server.logic.command.CommandException;
 import by.bsuir.kaziukovich.archive.server.dataaccess.record.StudentRecordDaoFactory;
 import java.util.ArrayList;
 import java.util.Objects;
