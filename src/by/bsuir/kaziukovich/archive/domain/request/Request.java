@@ -18,6 +18,10 @@ public class Request {
         return requestContent;
     }
 
+    public String getRequester() {
+        return requester;
+    }
+
     @Override
     public boolean equals(Object o) {
         Request toCompare;

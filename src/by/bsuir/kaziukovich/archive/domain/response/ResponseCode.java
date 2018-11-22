@@ -2,7 +2,7 @@ package by.bsuir.kaziukovich.archive.domain.response;
 
 public enum ResponseCode {
     SUCCESS,
-    ILLEGAL_ACCESS,
+    NO_SUCH_COMMAND,
     INTERNAL_FAILURE,
     ILLEGAL_ARGUMENTS
 }
