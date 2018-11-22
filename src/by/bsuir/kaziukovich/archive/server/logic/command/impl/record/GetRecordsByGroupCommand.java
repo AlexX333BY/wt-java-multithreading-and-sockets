@@ -36,16 +36,14 @@ public class GetRecordsByGroupCommand implements Command {
 
     @Override
     public boolean equals(Object o) {
-        GetRecordsByGroupCommand toCompare;
-
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        toCompare = (GetRecordsByGroupCommand) o;
-        return Objects.equals(splitter, toCompare.splitter);
+
+        return Objects.equals(splitter, ((GetRecordsByGroupCommand) o).splitter);
     }
 
     @Override

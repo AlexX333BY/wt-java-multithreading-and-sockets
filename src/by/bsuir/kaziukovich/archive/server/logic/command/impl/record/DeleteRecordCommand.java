@@ -21,4 +21,9 @@ public class DeleteRecordCommand implements Command {
             throw new CommandException("Error deleting record " + request[0] + ' ' + request[1], e);
         }
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName();
+    }
 }

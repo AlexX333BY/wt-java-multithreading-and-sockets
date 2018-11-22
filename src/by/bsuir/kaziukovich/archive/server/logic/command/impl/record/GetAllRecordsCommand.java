@@ -29,16 +29,14 @@ public class GetAllRecordsCommand implements Command {
 
     @Override
     public boolean equals(Object o) {
-        GetAllRecordsCommand toCompare;
-
         if (this == o) {
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        toCompare = (GetAllRecordsCommand) o;
-        return Objects.equals(splitter, toCompare.splitter);
+
+        return Objects.equals(splitter, ((GetAllRecordsCommand) o).splitter);
     }
 
     @Override

@@ -26,4 +26,9 @@ public class AddRecordCommand implements Command {
             throw new IllegalArgumentException("Error converting date " + request[2]);
         }
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName();
+    }
 }
