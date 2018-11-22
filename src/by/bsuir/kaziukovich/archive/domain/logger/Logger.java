@@ -9,6 +9,10 @@ public class Logger {
         throwable.printStackTrace(errorStream);
     }
 
+    public static void log(String message) {
+        errorStream.println(message);
+    }
+
     public static void setErrorStream(PrintStream stream) {
         errorStream = stream;
     }
