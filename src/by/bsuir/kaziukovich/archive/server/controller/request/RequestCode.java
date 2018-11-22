@@ -8,5 +8,4 @@ public enum RequestCode {
     DELETE_RECORD,
     ADD_ACCOUNT,
     UPDATE_ACCOUNT,
-    CHECK_IS_ACCOUNT_ADMIN
 }
