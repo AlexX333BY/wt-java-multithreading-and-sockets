@@ -1,6 +1,6 @@
-package by.bsuir.kaziukovich.archive.logic.command.request;
+package by.bsuir.kaziukovich.archive.server.controller.request;
 
-public enum CommandRequestCode {
+public enum RequestCode {
     GET_ALL_RECORDS,
     UPDATE_RECORD,
     ADD_RECORD,

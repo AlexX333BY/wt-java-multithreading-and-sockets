@@ -1,13 +1,11 @@
-package by.bsuir.kaziukovich.archive.logic.command.impl.record;
+package by.bsuir.kaziukovich.archive.server.command.impl.record;
 
 import by.bsuir.kaziukovich.archive.domain.record.StudentRecord;
-import by.bsuir.kaziukovich.archive.logic.command.Command;
-import by.bsuir.kaziukovich.archive.logic.command.CommandException;
-import by.bsuir.kaziukovich.archive.logic.command.request.CommandRequest;
-import by.bsuir.kaziukovich.archive.logic.command.response.CommandResponse;
-import by.bsuir.kaziukovich.archive.logic.command.response.CommandResponseCode;
+import by.bsuir.kaziukovich.archive.server.command.Command;
+import by.bsuir.kaziukovich.archive.server.command.CommandException;
 import by.bsuir.kaziukovich.archive.server.dataaccess.record.StudentRecordDaoFactory;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GetAllRecordsCommand implements Command {
     private final String splitter;
@@ -19,14 +17,38 @@ public class GetAllRecordsCommand implements Command {
     }
 
     @Override
-    public CommandResponse execute(CommandRequest request) throws CommandException {
+    public String[] execute(String[] request) throws CommandException {
         ArrayList<String> result = new ArrayList<>();
 
         for (StudentRecord student : StudentRecordDaoFactory.getDao().getAll()) {
             result.add(createRecordStringRepresentation(student));
         }
 
-        return new CommandResponse(CommandResponseCode.SUCCESS, result.toArray(new String[0]));
+        return result.toArray(new String[0]);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        GetAllRecordsCommand toCompare;
+
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        toCompare = (GetAllRecordsCommand) o;
+        return Objects.equals(splitter, toCompare.splitter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(splitter);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName() + "@splitter: " + splitter;
     }
 
     public GetAllRecordsCommand() {

@@ -1,16 +1,16 @@
-package by.bsuir.kaziukovich.archive.logic.command.request;
+package by.bsuir.kaziukovich.archive.server.controller.request;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public class CommandRequest {
-    private final CommandRequestCode requestCode;
+public class Request {
+    private final RequestCode requestCode;
 
     private final String[] requestContent;
 
     private final String requester;
 
-    public CommandRequestCode getRequestCode() {
+    public RequestCode getRequestCode() {
         return requestCode;
     }
 
@@ -20,7 +20,7 @@ public class CommandRequest {
 
     @Override
     public boolean equals(Object o) {
-        CommandRequest toCompare;
+        Request toCompare;
 
         if (this == o) {
             return true;
@@ -29,7 +29,7 @@ public class CommandRequest {
             return false;
         }
 
-        toCompare = (CommandRequest) o;
+        toCompare = (Request) o;
         return (requestCode == toCompare.requestCode) && Arrays.equals(requestContent, toCompare.requestContent);
     }
 
@@ -44,7 +44,7 @@ public class CommandRequest {
                 + Arrays.toString(requestContent);
     }
 
-    public CommandRequest(CommandRequestCode requestCode, String[] content, String requester) {
+    public Request(RequestCode requestCode, String[] content, String requester) {
         if (requestCode == null) {
             throw new IllegalArgumentException("Arguments shouldn't be null");
         }

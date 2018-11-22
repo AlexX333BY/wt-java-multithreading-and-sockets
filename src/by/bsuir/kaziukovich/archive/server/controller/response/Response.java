@@ -1,14 +1,14 @@
-package by.bsuir.kaziukovich.archive.logic.command.response;
+package by.bsuir.kaziukovich.archive.server.controller.response;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-public class CommandResponse {
-    private final CommandResponseCode responseCode;
+public class Response {
+    private final ResponseCode responseCode;
 
     private final String[] responseContent;
 
-    public CommandResponseCode getResponseCode() {
+    public ResponseCode getResponseCode() {
         return responseCode;
     }
 
@@ -18,7 +18,7 @@ public class CommandResponse {
 
     @Override
     public boolean equals(Object o) {
-        CommandResponse toCompare;
+        Response toCompare;
 
         if (this == o) {
             return true;
@@ -27,7 +27,7 @@ public class CommandResponse {
             return false;
         }
 
-        toCompare = (CommandResponse) o;
+        toCompare = (Response) o;
         return (responseCode == toCompare.responseCode) && Arrays.equals(responseContent, toCompare.responseContent);
     }
 
@@ -42,7 +42,7 @@ public class CommandResponse {
                 + Arrays.toString(responseContent);
     }
 
-    public CommandResponse(CommandResponseCode responseCode, String[] content) {
+    public Response(ResponseCode responseCode, String[] content) {
         if (responseCode == null) {
             throw new IllegalArgumentException("Arguments shouldn't be null");
         }
