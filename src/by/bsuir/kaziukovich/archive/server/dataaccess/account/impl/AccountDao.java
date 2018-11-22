@@ -141,7 +141,9 @@ public class AccountDao implements by.bsuir.kaziukovich.archive.server.dataacces
         }
 
         try {
-            AccountReaderWriterFactory.getReaderWriter().writeTo(accounts, path);
+            synchronized (accountsModifySync) {
+                AccountReaderWriterFactory.getReaderWriter().writeTo(accounts, path);
+            }
         } catch (ReadWriteException e) {
             throw new DaoException("Error updating into " + path, e);
         }

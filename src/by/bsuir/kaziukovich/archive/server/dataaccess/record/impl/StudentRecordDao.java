@@ -84,7 +84,27 @@ public class StudentRecordDao implements by.bsuir.kaziukovich.archive.server.dat
 
     @Override
     public void update(int group, String name, String surname, String address, Date dateOfBirth) throws DaoException {
+        String trimmedName, trimmedSurname, trimmedAddress;
 
+        if (group < 0) {
+            throw new IllegalArgumentException("Group shouldn't be negative");
+        }
+        if ((name == null) || (address == null) || (surname == null) || (dateOfBirth == null)) {
+            throw new IllegalArgumentException("Arguments shouldn't be null");
+        }
+
+        trimmedAddress = address.trim();
+        trimmedName = name.trim();
+        trimmedSurname = surname.trim();
+
+        if (trimmedAddress.isEmpty() || trimmedName.isEmpty() || trimmedSurname.isEmpty()) {
+            throw new IllegalArgumentException("Arguments shouldn't be empty");
+        }
+
+        synchronized (studentsModifySync) {
+            delete(trimmedSurname, trimmedName);
+            add(group, trimmedName, trimmedSurname, trimmedAddress, dateOfBirth);
+        }
     }
 
     @Override
@@ -148,7 +168,9 @@ public class StudentRecordDao implements by.bsuir.kaziukovich.archive.server.dat
         }
 
         try {
-            StudentRecordReaderWriterFactory.getReaderWriter().writeTo(students, path);
+            synchronized (studentsModifySync) {
+                StudentRecordReaderWriterFactory.getReaderWriter().writeTo(students, path);
+            }
         } catch (ReadWriteException e) {
             throw new DaoException("Error updating into " + path, e);
         }

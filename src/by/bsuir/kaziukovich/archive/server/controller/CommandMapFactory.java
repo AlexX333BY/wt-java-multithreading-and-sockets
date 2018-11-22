@@ -7,7 +7,6 @@ import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.AddAccount
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.DoesAccountExistCommand;
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.UpdateAccountCommand;
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.record.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
