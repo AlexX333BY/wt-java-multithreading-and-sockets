@@ -1,7 +1,7 @@
 package by.bsuir.kaziukovich.archive.server.controller;
 
-import by.bsuir.kaziukovich.archive.domain.account.UserRole;
-import by.bsuir.kaziukovich.archive.server.controller.request.RequestCode;
+import by.bsuir.kaziukovich.archive.server.domain.account.UserRole;
+import by.bsuir.kaziukovich.archive.domain.request.RequestCode;
 import by.bsuir.kaziukovich.archive.server.logic.command.Command;
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.AddAccountCommand;
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.DoesAccountExistCommand;

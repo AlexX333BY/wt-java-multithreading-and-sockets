@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.server.controller.response;
+package by.bsuir.kaziukovich.archive.domain.response;
 
 public enum ResponseCode {
     SUCCESS,

@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.server.controller.request;
+package by.bsuir.kaziukovich.archive.domain.request;
 
 import java.util.Arrays;
 import java.util.Objects;

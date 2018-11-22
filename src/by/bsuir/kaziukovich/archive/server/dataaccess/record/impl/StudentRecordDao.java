@@ -1,7 +1,7 @@
 package by.bsuir.kaziukovich.archive.server.dataaccess.record.impl;
 
-import by.bsuir.kaziukovich.archive.domain.record.StudentRecord;
-import by.bsuir.kaziukovich.archive.domain.record.StudentRecordFactory;
+import by.bsuir.kaziukovich.archive.server.domain.record.StudentRecord;
+import by.bsuir.kaziukovich.archive.server.domain.record.StudentRecordFactory;
 import by.bsuir.kaziukovich.archive.server.data.ReadWriteException;
 import by.bsuir.kaziukovich.archive.server.data.record.StudentRecordReaderWriterFactory;
 import by.bsuir.kaziukovich.archive.server.dataaccess.DaoException;

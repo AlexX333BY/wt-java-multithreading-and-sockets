@@ -1,7 +1,7 @@
 package by.bsuir.kaziukovich.archive.server.dataaccess.account;
 
-import by.bsuir.kaziukovich.archive.domain.account.Account;
-import by.bsuir.kaziukovich.archive.domain.account.UserRole;
+import by.bsuir.kaziukovich.archive.server.domain.account.Account;
+import by.bsuir.kaziukovich.archive.server.domain.account.UserRole;
 import by.bsuir.kaziukovich.archive.server.dataaccess.Dao;
 import by.bsuir.kaziukovich.archive.server.dataaccess.DaoException;
 

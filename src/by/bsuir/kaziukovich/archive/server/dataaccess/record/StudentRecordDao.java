@@ -1,6 +1,6 @@
 package by.bsuir.kaziukovich.archive.server.dataaccess.record;
 
-import by.bsuir.kaziukovich.archive.domain.record.StudentRecord;
+import by.bsuir.kaziukovich.archive.server.domain.record.StudentRecord;
 import by.bsuir.kaziukovich.archive.server.dataaccess.Dao;
 import by.bsuir.kaziukovich.archive.server.dataaccess.DaoException;
 import java.util.Date;

@@ -1,6 +1,6 @@
 package by.bsuir.kaziukovich.archive.server.logic.command.impl.account;
 
-import by.bsuir.kaziukovich.archive.domain.account.UserRole;
+import by.bsuir.kaziukovich.archive.server.domain.account.UserRole;
 import by.bsuir.kaziukovich.archive.server.dataaccess.DaoException;
 import by.bsuir.kaziukovich.archive.server.dataaccess.account.AccountDaoFactory;
 import by.bsuir.kaziukovich.archive.server.logic.command.Command;

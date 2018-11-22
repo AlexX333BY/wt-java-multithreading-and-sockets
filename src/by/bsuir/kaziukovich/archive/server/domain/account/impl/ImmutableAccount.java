@@ -1,9 +1,9 @@
-package by.bsuir.kaziukovich.archive.domain.account.impl;
+package by.bsuir.kaziukovich.archive.server.domain.account.impl;
 
-import by.bsuir.kaziukovich.archive.domain.account.UserRole;
+import by.bsuir.kaziukovich.archive.server.domain.account.UserRole;
 import java.util.Objects;
 
-public class ImmutableAccount implements by.bsuir.kaziukovich.archive.domain.account.Account {
+public class ImmutableAccount implements by.bsuir.kaziukovich.archive.server.domain.account.Account {
     private final String username;
 
     private final String passwordHash;

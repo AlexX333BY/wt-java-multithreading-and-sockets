@@ -1,6 +1,6 @@
-package by.bsuir.kaziukovich.archive.domain.record;
+package by.bsuir.kaziukovich.archive.server.domain.record;
 
-import by.bsuir.kaziukovich.archive.domain.record.impl.ImmutableStudentRecord;
+import by.bsuir.kaziukovich.archive.server.domain.record.impl.ImmutableStudentRecord;
 import java.util.Date;
 
 public class StudentRecordFactory {

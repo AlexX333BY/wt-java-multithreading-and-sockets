@@ -1,6 +1,6 @@
-package by.bsuir.kaziukovich.archive.domain.record.impl;
+package by.bsuir.kaziukovich.archive.server.domain.record.impl;
 
-import by.bsuir.kaziukovich.archive.domain.record.StudentRecord;
+import by.bsuir.kaziukovich.archive.server.domain.record.StudentRecord;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;

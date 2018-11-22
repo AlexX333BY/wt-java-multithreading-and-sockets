@@ -1,6 +1,6 @@
-package by.bsuir.kaziukovich.archive.domain.account;
+package by.bsuir.kaziukovich.archive.server.domain.account;
 
-import by.bsuir.kaziukovich.archive.domain.account.impl.ImmutableAccount;
+import by.bsuir.kaziukovich.archive.server.domain.account.impl.ImmutableAccount;
 
 public class AccountFactory {
     public static Account createAccount(String username, String passwordHash, UserRole role) {

@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.domain.account;
+package by.bsuir.kaziukovich.archive.server.domain.account;
 
 public interface Account {
     String getUsername();

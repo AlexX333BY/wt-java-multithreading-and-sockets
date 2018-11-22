@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.server.controller.request;
+package by.bsuir.kaziukovich.archive.domain.request;
 
 public enum RequestCode {
     GET_ALL_RECORDS,

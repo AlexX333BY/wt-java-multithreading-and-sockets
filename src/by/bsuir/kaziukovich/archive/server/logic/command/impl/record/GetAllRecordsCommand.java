@@ -1,6 +1,6 @@
 package by.bsuir.kaziukovich.archive.server.logic.command.impl.record;
 
-import by.bsuir.kaziukovich.archive.domain.record.StudentRecord;
+import by.bsuir.kaziukovich.archive.server.domain.record.StudentRecord;
 import by.bsuir.kaziukovich.archive.server.logic.command.Command;
 import by.bsuir.kaziukovich.archive.server.logic.command.CommandException;
 import by.bsuir.kaziukovich.archive.server.dataaccess.record.StudentRecordDaoFactory;
