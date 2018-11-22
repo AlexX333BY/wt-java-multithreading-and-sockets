@@ -8,6 +8,8 @@ public class CommandRequest {
 
     private final String[] requestContent;
 
+    private final String requester;
+
     public CommandRequestCode getRequestCode() {
         return requestCode;
     }
@@ -42,12 +44,17 @@ public class CommandRequest {
                 + Arrays.toString(requestContent);
     }
 
-    public CommandRequest(CommandRequestCode requestCode, String[] content) {
-        if ((requestCode == null) || (content == null)) {
+    public CommandRequest(CommandRequestCode requestCode, String[] content, String requester) {
+        if (requestCode == null) {
             throw new IllegalArgumentException("Arguments shouldn't be null");
         }
 
         this.requestCode = requestCode;
-        requestContent = content.clone();
+        this.requester = requester;
+        if (content == null) {
+            requestContent = null;
+        } else {
+            requestContent = content.clone();
+        }
     }
 }

@@ -43,11 +43,15 @@ public class CommandResponse {
     }
 
     public CommandResponse(CommandResponseCode responseCode, String[] content) {
-        if ((responseCode == null) || (content == null)) {
+        if (responseCode == null) {
             throw new IllegalArgumentException("Arguments shouldn't be null");
         }
 
         this.responseCode = responseCode;
-        responseContent = content.clone();
+        if (content == null) {
+            responseContent = null;
+        } else {
+            responseContent = content.clone();
+        }
     }
 }
