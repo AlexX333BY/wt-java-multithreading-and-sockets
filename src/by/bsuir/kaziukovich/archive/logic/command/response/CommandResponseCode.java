@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.logic;
+package by.bsuir.kaziukovich.archive.logic.command.response;
 
 public enum CommandResponseCode {
     SUCCESS,

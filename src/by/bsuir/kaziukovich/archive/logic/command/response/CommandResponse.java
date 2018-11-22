@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.logic;
+package by.bsuir.kaziukovich.archive.logic.command.response;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -33,10 +33,7 @@ public class CommandResponse {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(responseCode);
-
-        result = 31 * result + Arrays.hashCode(responseContent);
-        return result;
+        return 31 * Objects.hash(responseCode) + Arrays.hashCode(responseContent);
     }
 
     @Override
