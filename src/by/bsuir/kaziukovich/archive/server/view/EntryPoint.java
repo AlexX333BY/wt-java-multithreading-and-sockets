@@ -4,7 +4,7 @@ import by.bsuir.kaziukovich.archive.domain.logger.Logger;
 import by.bsuir.kaziukovich.archive.server.dataaccess.DaoException;
 import by.bsuir.kaziukovich.archive.server.dataaccess.account.AccountDaoFactory;
 import by.bsuir.kaziukovich.archive.server.dataaccess.record.StudentRecordDaoFactory;
-import by.bsuir.kaziukovich.archive.server.view.impl.MultiThreadSocketListener;
+import by.bsuir.kaziukovich.archive.server.view.impl.MultithreadSocketListener;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -36,7 +36,7 @@ public class EntryPoint {
         }
 
         try {
-            listener = new MultiThreadSocketListener(Integer.parseInt(args[0]));
+            listener = new MultithreadSocketListener(Integer.parseInt(args[0]));
         } catch (IllegalArgumentException e) {
             Logger.log(e);
             return;
