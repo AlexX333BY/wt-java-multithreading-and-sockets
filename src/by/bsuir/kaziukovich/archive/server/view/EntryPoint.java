@@ -39,14 +39,14 @@ public class EntryPoint {
         }
 
         try {
-            listener = new MultithreadSocketListener(Integer.parseInt(args[0]));
+            listener = new MultithreadSocketListener(Integer.parseInt(args[2]));
         } catch (IllegalArgumentException e) {
             Logger.log(e);
             return;
         }
 
         listenerThread = new Thread(listener);
-        listenerThread.run();
+        listenerThread.start();
 
         while (!ConsoleScanner.getNonEmptyString().equals(SHUTDOWN_KEYWORD));
 

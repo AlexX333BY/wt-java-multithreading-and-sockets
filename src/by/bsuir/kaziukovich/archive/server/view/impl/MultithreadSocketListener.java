@@ -57,7 +57,10 @@ public class MultithreadSocketListener implements SocketListener, Runnable {
 
     @Override
     public void stopListen() {
-        requests.add(null);
+        synchronized (requests) {
+            requests.add(new SocketRequest(null, null));
+            requests.notify();
+        }
         shouldRun = false;
         try {
             serverSocket.close();

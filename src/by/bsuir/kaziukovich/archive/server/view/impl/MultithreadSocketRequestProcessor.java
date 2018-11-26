@@ -45,11 +45,11 @@ public class MultithreadSocketRequestProcessor implements SocketRequestProcessor
                 socketRequest = requests.poll();
             }
 
-            if (socketRequest != null) {
+            if (socketRequest.getSocket() != null) {
                 SocketRequest finalSocketRequest = socketRequest;
                 threadPool.submit(() -> processRequest(finalSocketRequest));
             }
-        } while (socketRequest != null);
+        } while (socketRequest.getSocket() != null);
 
         threadPool.shutdown();
         try {
