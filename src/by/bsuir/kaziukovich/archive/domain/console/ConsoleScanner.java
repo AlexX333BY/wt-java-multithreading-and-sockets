@@ -18,5 +18,21 @@ public class ConsoleScanner {
         return result;
     }
 
+    public static int getInt() {
+        while (!consoleScanner.hasNextInt()) {
+            consoleScanner.next();
+        }
+        return consoleScanner.nextInt();
+    }
+
+    public static int getPositiveInt() {
+        int result;
+
+        do {
+            result = getInt();
+        } while (result <= 0);
+        return result;
+    }
+
     private ConsoleScanner() {}
 }
