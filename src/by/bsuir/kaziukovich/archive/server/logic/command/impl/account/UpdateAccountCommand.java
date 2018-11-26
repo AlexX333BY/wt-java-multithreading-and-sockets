@@ -11,6 +11,9 @@ public class UpdateAccountCommand implements Command {
 
     @Override
     public String[] execute(String[] request) throws CommandException {
+        if (request == null) {
+            throw new IllegalArgumentException("Request shouldn't be null");
+        }
         if (request.length < REQUIRED_ARGUMENTS_COUNT) {
             throw new IllegalArgumentException("Not enough arguments");
         }

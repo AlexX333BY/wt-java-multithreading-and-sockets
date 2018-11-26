@@ -6,6 +6,7 @@ import by.bsuir.kaziukovich.archive.server.logic.command.Command;
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.AddAccountCommand;
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.DoesAccountExistCommand;
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.UpdateAccountCommand;
+import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.UpdateAccountStorageCommand;
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.record.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +48,8 @@ public class CommandMapFactory {
         result.put(RequestCode.DELETE_RECORD, new DeleteRecordCommand());
         result.put(RequestCode.UPDATE_RECORD, new UpdateRecordCommand());
         result.put(RequestCode.UPDATE_ACCOUNT, new UpdateAccountCommand());
+        result.put(RequestCode.UPDATE_ACCOUNT_STORAGE, new UpdateAccountStorageCommand());
+        result.put(RequestCode.UPDATE_RECORD_STORAGE, new UpdateRecordStorageCommand());
         return result;
     }
 

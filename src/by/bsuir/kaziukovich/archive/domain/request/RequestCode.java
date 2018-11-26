@@ -9,5 +9,7 @@ public enum RequestCode {
     ADD_ACCOUNT,
     UPDATE_ACCOUNT,
     DOES_ACCOUNT_EXIST,
-    LOGIN
+    LOGIN,
+    UPDATE_ACCOUNT_STORAGE,
+    UPDATE_RECORD_STORAGE
 }

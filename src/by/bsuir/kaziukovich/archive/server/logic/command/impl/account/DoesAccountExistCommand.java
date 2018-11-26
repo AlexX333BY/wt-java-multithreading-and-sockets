@@ -12,6 +12,9 @@ public class DoesAccountExistCommand implements Command {
     public String[] execute(String[] request) throws CommandException {
         boolean result;
 
+        if (request == null) {
+            throw new IllegalArgumentException("Request shouldn't be null");
+        }
         if (request.length < REQUIRED_ARGUMENTS_COUNT) {
             throw new IllegalArgumentException("Not enough arguments");
         }

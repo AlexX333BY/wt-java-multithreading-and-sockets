@@ -5,23 +5,14 @@ import by.bsuir.kaziukovich.archive.server.dataaccess.account.AccountDaoFactory;
 import by.bsuir.kaziukovich.archive.server.logic.command.Command;
 import by.bsuir.kaziukovich.archive.server.logic.command.CommandException;
 
-public class LoginCommand implements Command {
-    private static final byte REQUIRED_ARGUMENTS_COUNT = 2;
-
+public class UpdateAccountStorageCommand implements Command {
     @Override
     public String[] execute(String[] request) throws CommandException {
-        if (request == null) {
-            throw new IllegalArgumentException("Request shouldn't be null");
-        }
-        if (request.length < REQUIRED_ARGUMENTS_COUNT) {
-            throw new IllegalArgumentException("Not enough arguments");
-        }
-
         try {
-            return new String[]
-                    {Boolean.toString(AccountDaoFactory.getDao().get(request[0]).getPasswordHash().equals(request[1]))};
+            AccountDaoFactory.getDao().updateInStorage();
+            return null;
         } catch (DaoException e) {
-            throw new CommandException("Error adding new account " + request[0], e);
+            throw new CommandException("Error updating in storage", e);
         }
     }
 

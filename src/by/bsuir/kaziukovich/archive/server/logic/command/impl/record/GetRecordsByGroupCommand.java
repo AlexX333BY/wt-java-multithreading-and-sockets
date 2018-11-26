@@ -23,6 +23,9 @@ public class GetRecordsByGroupCommand implements Command {
     public String[] execute(String[] request) throws CommandException {
         ArrayList<String> result = new ArrayList<>();
 
+        if (request == null) {
+            throw new IllegalArgumentException("Request shouldn't be null");
+        }
         if (request.length < REQUIRED_ARGUMENTS_COUNT) {
             throw new IllegalArgumentException("Not enough arguments");
         }
