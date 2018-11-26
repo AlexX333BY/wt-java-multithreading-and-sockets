@@ -18,9 +18,10 @@ public class MultithreadSocketListener implements SocketListener, Runnable {
 
     private Thread processingThread;
 
+    private ServerSocket serverSocket;
+
     @Override
     public void startListen() {
-        ServerSocket serverSocket;
         Socket clientSocket;
         Request request;
         shouldRun = true;
@@ -44,17 +45,13 @@ public class MultithreadSocketListener implements SocketListener, Runnable {
                         requests.notify();
                     }
                 }
+            } catch (java.net.SocketException e) {
+                Logger.log(new SocketException("Socket exception caught, possibly close() call", e));
             } catch (IOException e) {
                 Logger.log(new SocketException("Error accepting user socket", e));
             } catch (ClassNotFoundException | ClassCastException e) {
                 Logger.log(new SocketException("Illegal object input", e));
             }
-        }
-
-        try {
-            serverSocket.close();
-        } catch (IOException e) {
-            Logger.log(new SocketException("Error closing server exception", e));
         }
     }
 
@@ -62,6 +59,11 @@ public class MultithreadSocketListener implements SocketListener, Runnable {
     public void stopListen() {
         requests.add(null);
         shouldRun = false;
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            Logger.log(new SocketException("Error closing server socket", e));
+        }
     }
 
     @Override
