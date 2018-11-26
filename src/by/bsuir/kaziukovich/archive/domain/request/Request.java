@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Request {
-    private final RequestCode requestCode;
+    private final String requestCode;
 
     private final String[] requestContent;
 
     private final String requester;
 
-    public RequestCode getRequestCode() {
+    public String getRequestCode() {
         return requestCode;
     }
 
@@ -34,7 +34,7 @@ public class Request {
         }
 
         toCompare = (Request) o;
-        return (requestCode == toCompare.requestCode) && Arrays.equals(requestContent, toCompare.requestContent);
+        return Objects.equals(requestCode, toCompare.requestCode) && Arrays.equals(requestContent, toCompare.requestContent);
     }
 
     @Override
@@ -48,9 +48,9 @@ public class Request {
                 + Arrays.toString(requestContent);
     }
 
-    public Request(RequestCode requestCode, String[] content, String requester) {
+    public Request(String requestCode, String[] content, String requester) {
         if (requestCode == null) {
-            throw new IllegalArgumentException("Arguments shouldn't be null");
+            throw new IllegalArgumentException("Request code shouldn't be null");
         }
 
         this.requestCode = requestCode;

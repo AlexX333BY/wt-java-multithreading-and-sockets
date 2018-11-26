@@ -2,6 +2,7 @@ package by.bsuir.kaziukovich.archive.server.controller.impl;
 
 import by.bsuir.kaziukovich.archive.domain.logger.Logger;
 import by.bsuir.kaziukovich.archive.domain.request.Request;
+import by.bsuir.kaziukovich.archive.domain.request.RequestCode;
 import by.bsuir.kaziukovich.archive.domain.response.Response;
 import by.bsuir.kaziukovich.archive.domain.response.ResponseCode;
 import by.bsuir.kaziukovich.archive.server.controller.CommandMapFactory;
@@ -23,19 +24,19 @@ public class Controller implements by.bsuir.kaziukovich.archive.server.controlle
             role = null;
         }
 
-        command = CommandMapFactory.getCommands(role).get(request.getRequestCode());
+        command = CommandMapFactory.getCommands(role).get(RequestCode.valueOf(request.getRequestCode()));
         if (command == null) {
-            return new Response(ResponseCode.NO_SUCH_COMMAND, null);
+            return new Response(ResponseCode.NO_SUCH_COMMAND.toString(), null);
         }
 
         try {
-            return new Response(ResponseCode.SUCCESS, command.execute(request.getRequestContent()));
+            return new Response(ResponseCode.SUCCESS.toString(), command.execute(request.getRequestContent()));
         } catch (CommandException e) {
             Logger.log(e);
-            return new Response(ResponseCode.INTERNAL_FAILURE, null);
+            return new Response(ResponseCode.INTERNAL_FAILURE.toString(), null);
         } catch (IllegalArgumentException e) {
             Logger.log(e);
-            return new Response(ResponseCode.ILLEGAL_ARGUMENTS, null);
+            return new Response(ResponseCode.ILLEGAL_ARGUMENTS.toString(), null);
         }
     }
 }

@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Response {
-    private final ResponseCode responseCode;
+    private final String responseCode;
 
     private final String[] responseContent;
 
-    public ResponseCode getResponseCode() {
+    public String getResponseCode() {
         return responseCode;
     }
 
@@ -28,7 +28,7 @@ public class Response {
         }
 
         toCompare = (Response) o;
-        return (responseCode == toCompare.responseCode) && Arrays.equals(responseContent, toCompare.responseContent);
+        return Objects.equals(responseCode, toCompare.responseCode) && Arrays.equals(responseContent, toCompare.responseContent);
     }
 
     @Override
@@ -42,9 +42,9 @@ public class Response {
                 + Arrays.toString(responseContent);
     }
 
-    public Response(ResponseCode responseCode, String[] content) {
+    public Response(String responseCode, String[] content) {
         if (responseCode == null) {
-            throw new IllegalArgumentException("Arguments shouldn't be null");
+            throw new IllegalArgumentException("Response code shouldn't be null");
         }
 
         this.responseCode = responseCode;
