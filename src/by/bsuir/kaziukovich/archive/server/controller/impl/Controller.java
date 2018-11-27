@@ -26,17 +26,17 @@ public class Controller implements by.bsuir.kaziukovich.archive.server.controlle
 
         command = CommandMapFactory.getCommands(role).get(RequestCode.valueOf(request.getRequestCode()));
         if (command == null) {
-            return new Response(ResponseCode.NO_SUCH_COMMAND.toString(), null);
+            return new SerializableResponse(ResponseCode.NO_SUCH_COMMAND.toString(), null);
         }
 
         try {
-            return new Response(ResponseCode.SUCCESS.toString(), command.execute(request.getRequestContent()));
+            return new SerializableResponse(ResponseCode.SUCCESS.toString(), command.execute(request.getRequestContent()));
         } catch (CommandException e) {
             Logger.log(e);
-            return new Response(ResponseCode.INTERNAL_FAILURE.toString(), null);
+            return new SerializableResponse(ResponseCode.INTERNAL_FAILURE.toString(), null);
         } catch (IllegalArgumentException e) {
             Logger.log(e);
-            return new Response(ResponseCode.ILLEGAL_ARGUMENTS.toString(), null);
+            return new SerializableResponse(ResponseCode.ILLEGAL_ARGUMENTS.toString(), null);
         }
     }
 }

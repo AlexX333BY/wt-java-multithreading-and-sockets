@@ -6,24 +6,28 @@ import by.bsuir.kaziukovich.archive.domain.response.Response;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 
 public class SocketSender implements by.bsuir.kaziukovich.archive.client.logic.socketsender.SocketSender {
-    private final Socket destinationSocket;
+    private final InetAddress destinationAddress;
+
+    private final int destinationPort;
 
     @Override
     public Response send(Request request) throws SocketSenderException {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(destinationSocket.getOutputStream())) {
-            outputStream.writeObject(request);
-            try (ObjectInputStream inputStream = new ObjectInputStream(destinationSocket.getInputStream())) {
-                return (Response) inputStream.readObject();
-            }
+        try {
+            Socket destinationSocket = new Socket(destinationAddress, destinationPort);
+
+            new ObjectOutputStream(destinationSocket.getOutputStream()).writeObject(request);
+            return (Response) new ObjectInputStream(destinationSocket.getInputStream()).readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new SocketSenderException("Error sending request to destination", e);
         }
     }
 
-    public SocketSender(Socket destination) {
-        destinationSocket = destination;
+    public SocketSender(InetAddress destinationAddress, int destinationPort) {
+        this.destinationAddress = destinationAddress;
+        this.destinationPort = destinationPort;
     }
 }
