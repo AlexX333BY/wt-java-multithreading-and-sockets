@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class MultithreadSocketListener implements SocketListener, Runnable {
     private final int port;
 
-    private final ConcurrentLinkedQueue<SocketRequest> requests;
+    private final BlockingQueue<SocketRequest> requests;
 
     private volatile boolean shouldRun;
 
@@ -40,10 +41,7 @@ public class MultithreadSocketListener implements SocketListener, Runnable {
                 clientSocket = serverSocket.accept();
                 request = (Request) new ObjectInputStream(clientSocket.getInputStream()).readObject();
                 if (request != null) {
-                    synchronized (requests) {
-                        requests.add(new SocketRequest(clientSocket, request));
-                        requests.notify();
-                    }
+                    requests.add(new SocketRequest(clientSocket, request));
                 }
             } catch (java.net.SocketException e) {
                 Logger.log(new SocketException("Socket exception caught, possibly close() call", e));
@@ -57,10 +55,7 @@ public class MultithreadSocketListener implements SocketListener, Runnable {
 
     @Override
     public void stopListen() {
-        synchronized (requests) {
-            requests.add(new SocketRequest(null, null));
-            requests.notify();
-        }
+        requests.add(new SocketRequest(null, null));
         shouldRun = false;
         try {
             serverSocket.close();
@@ -84,7 +79,7 @@ public class MultithreadSocketListener implements SocketListener, Runnable {
         }
 
         this.port = port;
-        requests = new ConcurrentLinkedQueue<>();
+        requests = new LinkedBlockingQueue<>();
         processingThread = new Thread(new MultithreadSocketRequestProcessor(requests));
     }
 

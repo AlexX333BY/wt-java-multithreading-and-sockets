@@ -4,13 +4,13 @@ import by.bsuir.kaziukovich.archive.domain.logger.Logger;
 import by.bsuir.kaziukovich.archive.server.controller.ControllerFactory;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class MultithreadSocketRequestProcessor implements SocketRequestProcessor, Runnable {
-    private final Queue<SocketRequest> requests;
+    private final BlockingQueue<SocketRequest> requests;
 
     private final ExecutorService threadPool;
 
@@ -33,23 +33,18 @@ public class MultithreadSocketRequestProcessor implements SocketRequestProcessor
     public void start() {
         SocketRequest socketRequest;
 
-        do {
-            synchronized (requests) {
-                while (requests.isEmpty()) {
-                    try {
-                        requests.wait();
-                    } catch (InterruptedException e) {
-                        Logger.log(new SocketException("Thread was interrupted while waiting", e));
-                    }
-                }
-                socketRequest = requests.poll();
-            }
+        try {
+            do {
+                socketRequest = requests.take();
 
-            if (socketRequest.getSocket() != null) {
-                SocketRequest finalSocketRequest = socketRequest;
-                threadPool.submit(() -> processRequest(finalSocketRequest));
-            }
-        } while (socketRequest.getSocket() != null);
+                if (socketRequest.getSocket() != null) {
+                    SocketRequest finalSocketRequest = socketRequest;
+                    threadPool.submit(() -> processRequest(finalSocketRequest));
+                }
+            } while (socketRequest.getSocket() != null);
+        } catch (InterruptedException e) {
+            Logger.log("Thread was interrupted while taking object from queue");
+        }
 
         threadPool.shutdown();
         try {
@@ -64,7 +59,7 @@ public class MultithreadSocketRequestProcessor implements SocketRequestProcessor
         start();
     }
 
-    public MultithreadSocketRequestProcessor(Queue<SocketRequest> requests) {
+    public MultithreadSocketRequestProcessor(BlockingQueue<SocketRequest> requests) {
         if (requests == null) {
             throw new IllegalArgumentException("Requests shouldn't be null");
         }

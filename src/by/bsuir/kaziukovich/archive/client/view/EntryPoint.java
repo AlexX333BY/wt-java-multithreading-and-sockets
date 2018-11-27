@@ -144,7 +144,6 @@ public class EntryPoint {
                     System.out.println(getResponseMessage(sendRequest(request, false)));
                 } catch (SocketSenderException e) {
                     System.err.println("Transport error");
-                    e.printStackTrace(System.err);
                 }
             }
         } while (!request.equals(EXIT_COMMAND));
