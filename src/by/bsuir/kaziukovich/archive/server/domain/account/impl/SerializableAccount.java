@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.server.data.account.impl;
+package by.bsuir.kaziukovich.archive.server.domain.account.impl;
 
 import by.bsuir.kaziukovich.archive.server.domain.account.Account;
 import by.bsuir.kaziukovich.archive.server.domain.account.UserRole;
@@ -26,17 +26,17 @@ public class SerializableAccount implements Account, Serializable {
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
     public String getPasswordHash() {
-        return null;
+        return passwordHash;
     }
 
     @Override
     public UserRole getRole() {
-        return null;
+        return role;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class SerializableAccount implements Account, Serializable {
         return getClass().getName() + "@username: " + username + ", passwordHash: " + passwordHash + ", role: " + role;
     }
 
-    SerializableAccount(String username, String passwordHash, UserRole role) {
+    public SerializableAccount(String username, String passwordHash, UserRole role) {
         if ((username == null) || (passwordHash == null) || (role == null)) {
             throw new IllegalArgumentException("Arguments shouldn't be null");
         }
@@ -79,7 +79,7 @@ public class SerializableAccount implements Account, Serializable {
         }
     }
 
-    SerializableAccount(Account account) {
+    public SerializableAccount(Account account) {
         this(account.getUsername(), account.getPasswordHash(), account.getRole());
     }
 

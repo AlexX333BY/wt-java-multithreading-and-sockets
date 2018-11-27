@@ -1,4 +1,4 @@
-package by.bsuir.kaziukovich.archive.server.data.record.impl;
+package by.bsuir.kaziukovich.archive.server.domain.record.impl;
 
 import by.bsuir.kaziukovich.archive.server.domain.record.StudentRecord;
 import java.io.Serializable;
@@ -89,7 +89,7 @@ public class SerializableStudentRecord implements StudentRecord, Serializable {
                 + address + ", dateOfBirth: " + dateOfBirth;
     }
 
-    SerializableStudentRecord(int group, String name, String surname, String address, Date dateOfBirth) {
+    public SerializableStudentRecord(int group, String name, String surname, String address, Date dateOfBirth) {
         if ((name == null) || (surname == null) || (address == null) || (dateOfBirth == null)) {
             throw new IllegalArgumentException("Arguments shouldn't be null");
         }
@@ -111,7 +111,7 @@ public class SerializableStudentRecord implements StudentRecord, Serializable {
         }
     }
 
-    SerializableStudentRecord(StudentRecord record) {
+    public SerializableStudentRecord(StudentRecord record) {
         this(record.getGroup(), record.getName(), record.getSurname(), record.getAddress(), record.getDateOfBirth());
     }
 

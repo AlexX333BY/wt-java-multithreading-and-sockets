@@ -109,7 +109,6 @@ public class EntryPoint {
         try {
             Response response = sendRequest(RequestCode.DOES_ACCOUNT_EXIST.toString() + ' ' + username,
                     true);
-            System.out.println(response.toString());
             if ((ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS)
                     && (response.getResponseContent()[0].equals(Boolean.toString(true)))) {
                 response = sendRequest(RequestCode.LOGIN.toString() + ' ' + username + ' ' + passwordHash,

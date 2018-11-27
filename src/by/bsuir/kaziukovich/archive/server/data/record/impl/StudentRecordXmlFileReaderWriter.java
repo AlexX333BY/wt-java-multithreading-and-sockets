@@ -1,5 +1,6 @@
 package by.bsuir.kaziukovich.archive.server.data.record.impl;
 
+import by.bsuir.kaziukovich.archive.server.domain.record.impl.SerializableStudentRecord;
 import by.bsuir.kaziukovich.archive.server.domain.record.StudentRecord;
 import by.bsuir.kaziukovich.archive.server.data.ReadWriteException;
 import by.bsuir.kaziukovich.archive.server.data.record.StudentRecordReaderWriter;
