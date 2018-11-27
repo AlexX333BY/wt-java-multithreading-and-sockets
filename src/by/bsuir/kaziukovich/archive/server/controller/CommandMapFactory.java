@@ -3,10 +3,7 @@ package by.bsuir.kaziukovich.archive.server.controller;
 import by.bsuir.kaziukovich.archive.server.domain.account.UserRole;
 import by.bsuir.kaziukovich.archive.domain.request.RequestCode;
 import by.bsuir.kaziukovich.archive.server.logic.command.Command;
-import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.AddAccountCommand;
-import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.DoesAccountExistCommand;
-import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.UpdateAccountCommand;
-import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.UpdateAccountStorageCommand;
+import by.bsuir.kaziukovich.archive.server.logic.command.impl.account.*;
 import by.bsuir.kaziukovich.archive.server.logic.command.impl.record.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +23,7 @@ public class CommandMapFactory {
 
         result.put(RequestCode.ADD_ACCOUNT, new AddAccountCommand());
         result.put(RequestCode.DOES_ACCOUNT_EXIST, new DoesAccountExistCommand());
-        result.put(RequestCode.LOGIN, new AddAccountCommand());
+        result.put(RequestCode.LOGIN, new LoginCommand());
         return result;
     }
 
