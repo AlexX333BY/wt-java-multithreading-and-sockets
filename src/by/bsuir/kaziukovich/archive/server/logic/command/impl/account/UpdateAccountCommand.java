@@ -19,7 +19,7 @@ public class UpdateAccountCommand implements Command {
         }
 
         try {
-            AccountDaoFactory.getDao().update(request[0], request[1], UserRole.valueOf(request[3]));
+            AccountDaoFactory.getDao().update(request[0], request[1], UserRole.valueOf(request[2]));
             return null;
         } catch (DaoException e) {
             throw new CommandException("Error updating account " + request[0], e);
