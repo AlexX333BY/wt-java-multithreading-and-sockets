@@ -22,7 +22,7 @@ public class SocketSender implements by.bsuir.kaziukovich.archive.client.logic.s
             new ObjectOutputStream(destinationSocket.getOutputStream()).writeObject(request);
             return (Response) new ObjectInputStream(destinationSocket.getInputStream()).readObject();
         } catch (IOException | ClassNotFoundException e) {
-            throw new SocketSenderException("Error sending request to destination", e);
+            throw new SocketSenderException("Transport error", e);
         }
     }
 

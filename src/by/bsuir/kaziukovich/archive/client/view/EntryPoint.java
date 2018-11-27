@@ -11,10 +11,7 @@ import by.bsuir.kaziukovich.archive.domain.console.ConsoleScanner;
 import by.bsuir.kaziukovich.archive.domain.request.RequestCode;
 import by.bsuir.kaziukovich.archive.domain.response.Response;
 import by.bsuir.kaziukovich.archive.domain.response.ResponseCode;
-import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Map;
@@ -103,14 +100,16 @@ public class EntryPoint {
     private static Response sendRequest(String userRequest, boolean sendAsUnauthorized) throws SocketSenderException {
         String[] splittedRequest = RequestSplitter.split(userRequest.trim());
 
-        return socketSender.send(new SerializableRequest(splittedRequest[0], Arrays.copyOfRange(splittedRequest, 1,
-                splittedRequest.length), sendAsUnauthorized ? null : username));
+        return socketSender.send(new SerializableRequest(splittedRequest[0].toUpperCase(),
+                Arrays.copyOfRange(splittedRequest, 1, splittedRequest.length),
+                sendAsUnauthorized ? null : username));
     }
 
     private static boolean tryLogin() {
         try {
             Response response = sendRequest(RequestCode.DOES_ACCOUNT_EXIST.toString() + ' ' + username,
                     true);
+            System.out.println(response.toString());
             if ((ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS)
                     && (response.getResponseContent()[0].equals(Boolean.toString(true)))) {
                 response = sendRequest(RequestCode.LOGIN.toString() + ' ' + username + ' ' + passwordHash,
@@ -118,8 +117,8 @@ public class EntryPoint {
                 return (ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS)
                         && (response.getResponseContent()[0].equals(Boolean.toString(true)));
             } else {
-                response = sendRequest(RequestCode.ADD_ACCOUNT.toString() + ' ' + username + ' ' + passwordHash,
-                        true);
+                response = sendRequest(RequestCode.ADD_ACCOUNT.toString() + ' ' + username + ' '
+                        + passwordHash, true);
                 return ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS;
             }
         } catch (SocketSenderException e) {
@@ -144,7 +143,8 @@ public class EntryPoint {
                 try {
                     System.out.println(getResponseMessage(sendRequest(request, false)));
                 } catch (SocketSenderException e) {
-                    System.err.println("Error sending command");
+                    System.err.println("Transport error");
+                    e.printStackTrace(System.err);
                 }
             }
         } while (!request.equals(EXIT_COMMAND));

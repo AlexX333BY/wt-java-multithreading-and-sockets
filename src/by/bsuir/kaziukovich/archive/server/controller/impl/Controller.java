@@ -24,7 +24,11 @@ public class Controller implements by.bsuir.kaziukovich.archive.server.controlle
             role = null;
         }
 
-        command = CommandMapFactory.getCommands(role).get(RequestCode.valueOf(request.getRequestCode()));
+        try {
+            command = CommandMapFactory.getCommands(role).get(RequestCode.valueOf(request.getRequestCode()));
+        } catch (IllegalArgumentException | NullPointerException e) {
+            command = null;
+        }
         if (command == null) {
             return new SerializableResponse(ResponseCode.NO_SUCH_COMMAND.toString(), null);
         }
