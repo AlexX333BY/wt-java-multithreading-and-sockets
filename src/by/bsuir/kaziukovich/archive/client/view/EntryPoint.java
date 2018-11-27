@@ -8,9 +8,14 @@ import by.bsuir.kaziukovich.archive.client.logic.socketsender.SocketSenderFactor
 import by.bsuir.kaziukovich.archive.client.logic.splitter.RequestSplitter;
 import by.bsuir.kaziukovich.archive.client.view.impl.SerializableRequest;
 import by.bsuir.kaziukovich.archive.domain.console.ConsoleScanner;
+import by.bsuir.kaziukovich.archive.domain.logger.Logger;
 import by.bsuir.kaziukovich.archive.domain.request.RequestCode;
 import by.bsuir.kaziukovich.archive.domain.response.Response;
 import by.bsuir.kaziukovich.archive.domain.response.ResponseCode;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -54,14 +59,18 @@ public class EntryPoint {
         if (args.length >= 1) {
             try {
                 serverAddress = InetAddress.getByName(args[0]);
-            } catch (UnknownHostException ignored) { }
+            } catch (UnknownHostException e) {
+                Logger.log(e);
+            }
         }
 
         while (serverAddress == null) {
             System.out.print("Enter server host: ");
             try {
                 serverAddress = InetAddress.getByName(ConsoleScanner.getNonEmptyString());
-            } catch (UnknownHostException ignored) { }
+            } catch (UnknownHostException e) {
+                Logger.log(e);
+            }
         }
 
         if (args.length >= 2) {
@@ -85,7 +94,9 @@ public class EntryPoint {
         if (args.length >= 4) {
             try {
                 passwordHash = PasswordDigestGeneratorFactory.getPasswordDigestGenerator().generate(args[3].trim());
-            } catch (PasswordDigestException ignored) { }
+            } catch (PasswordDigestException e) {
+                Logger.log(e);
+            }
         }
 
         while (passwordHash == null) {
@@ -93,7 +104,17 @@ public class EntryPoint {
             try {
                 passwordHash = PasswordDigestGeneratorFactory.getPasswordDigestGenerator()
                         .generate(ConsoleScanner.getNonEmptyString());
-            } catch (PasswordDigestException ignored) { }
+            } catch (PasswordDigestException e) {
+                Logger.log(e);
+            }
+        }
+
+        if (args.length >= 5) {
+            try {
+                Logger.setErrorStream(new PrintStream(new FileOutputStream(args[4])));
+            } catch (FileNotFoundException e) {
+                Logger.log(new Exception("Error creating file log stream, continuing with default", e));
+            }
         }
     }
 
@@ -109,18 +130,22 @@ public class EntryPoint {
         try {
             Response response = sendRequest(RequestCode.DOES_ACCOUNT_EXIST.toString() + ' ' + username,
                     true);
+
             if ((ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS)
                     && (response.getResponseContent()[0].equals(Boolean.toString(true)))) {
                 response = sendRequest(RequestCode.LOGIN.toString() + ' ' + username + ' ' + passwordHash,
                         true);
+
                 return (ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS)
                         && (response.getResponseContent()[0].equals(Boolean.toString(true)));
             } else {
                 response = sendRequest(RequestCode.ADD_ACCOUNT.toString() + ' ' + username + ' '
                         + passwordHash, true);
+
                 return ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS;
             }
         } catch (SocketSenderException e) {
+            Logger.log(e);
             return false;
         }
     }
@@ -142,7 +167,8 @@ public class EntryPoint {
                 try {
                     System.out.println(getResponseMessage(sendRequest(request, false)));
                 } catch (SocketSenderException e) {
-                    System.err.println("Transport error");
+                    Logger.log(e);
+                    System.out.println("Error executing command");
                 }
             }
         } while (!request.equals(EXIT_COMMAND));
