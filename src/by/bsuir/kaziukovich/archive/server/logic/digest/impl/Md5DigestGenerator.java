@@ -1,7 +1,7 @@
-package by.bsuir.kaziukovich.archive.client.logic.digest.impl;
+package by.bsuir.kaziukovich.archive.server.logic.digest.impl;
 
-import by.bsuir.kaziukovich.archive.client.logic.digest.PasswordDigestException;
-import by.bsuir.kaziukovich.archive.client.logic.digest.PasswordDigestGenerator;
+import by.bsuir.kaziukovich.archive.server.logic.digest.PasswordDigestException;
+import by.bsuir.kaziukovich.archive.server.logic.digest.PasswordDigestGenerator;
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

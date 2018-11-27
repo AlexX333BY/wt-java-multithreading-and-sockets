@@ -1,7 +1,7 @@
 package by.bsuir.kaziukovich.archive.client.view;
 
-import by.bsuir.kaziukovich.archive.client.logic.digest.PasswordDigestException;
-import by.bsuir.kaziukovich.archive.client.logic.digest.PasswordDigestGeneratorFactory;
+import by.bsuir.kaziukovich.archive.server.logic.digest.PasswordDigestException;
+import by.bsuir.kaziukovich.archive.server.logic.digest.PasswordDigestGeneratorFactory;
 import by.bsuir.kaziukovich.archive.client.logic.socketsender.SocketSender;
 import by.bsuir.kaziukovich.archive.client.logic.socketsender.SocketSenderException;
 import by.bsuir.kaziukovich.archive.client.logic.socketsender.SocketSenderFactory;
@@ -25,7 +25,7 @@ public class EntryPoint {
 
     private static String username;
 
-    private static String passwordHash;
+    private static String password;
 
     private static Map<ResponseCode, ResponseProcessor> responseProcessors;
 
@@ -91,21 +91,12 @@ public class EntryPoint {
         }
 
         if (args.length >= 4) {
-            try {
-                passwordHash = PasswordDigestGeneratorFactory.getPasswordDigestGenerator().generate(args[3].trim());
-            } catch (PasswordDigestException e) {
-                Logger.log(e);
-            }
+            password = args[3].trim();
         }
 
-        while (passwordHash == null) {
+        if ((password == null) || password.isEmpty()) {
             System.out.print("Enter password: ");
-            try {
-                passwordHash = PasswordDigestGeneratorFactory.getPasswordDigestGenerator()
-                        .generate(ConsoleScanner.getNonEmptyString());
-            } catch (PasswordDigestException e) {
-                Logger.log(e);
-            }
+            password = ConsoleScanner.getNonEmptyString();
         }
 
         if (args.length >= 5) {
@@ -132,14 +123,14 @@ public class EntryPoint {
 
             if ((ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS)
                     && (response.getResponseContent()[0].equals(Boolean.toString(true)))) {
-                response = sendRequest(RequestCode.LOGIN.toString() + ' ' + username + ' ' + passwordHash,
+                response = sendRequest(RequestCode.LOGIN.toString() + ' ' + username + ' ' + password,
                         true);
 
                 return (ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS)
                         && (response.getResponseContent()[0].equals(Boolean.toString(true)));
             } else {
                 response = sendRequest(RequestCode.ADD_ACCOUNT.toString() + ' ' + username + ' '
-                        + passwordHash, true);
+                        + password, true);
 
                 return ResponseCode.valueOf(response.getResponseCode()) == ResponseCode.SUCCESS;
             }

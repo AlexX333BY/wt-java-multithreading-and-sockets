@@ -1,5 +1,7 @@
 package by.bsuir.kaziukovich.archive.server.logic.command.impl.account;
 
+import by.bsuir.kaziukovich.archive.server.logic.digest.PasswordDigestException;
+import by.bsuir.kaziukovich.archive.server.logic.digest.PasswordDigestGeneratorFactory;
 import by.bsuir.kaziukovich.archive.server.dataaccess.DaoException;
 import by.bsuir.kaziukovich.archive.server.dataaccess.account.AccountDaoFactory;
 import by.bsuir.kaziukovich.archive.server.logic.command.Command;
@@ -18,10 +20,12 @@ public class LoginCommand implements Command {
         }
 
         try {
-            return new String[]
-                    {Boolean.toString(AccountDaoFactory.getDao().get(request[0]).getPasswordHash().equals(request[1]))};
+            return new String[] {Boolean.toString(AccountDaoFactory.getDao().get(request[0]).getPasswordHash()
+                            .equals(PasswordDigestGeneratorFactory.getPasswordDigestGenerator().generate(request[1])))};
         } catch (DaoException e) {
             throw new CommandException("Error adding new account " + request[0], e);
+        } catch (PasswordDigestException e) {
+            throw new CommandException("Error generating password digest", e);
         }
     }
 
