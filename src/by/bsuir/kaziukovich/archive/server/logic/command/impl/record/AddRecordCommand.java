@@ -21,7 +21,7 @@ public class AddRecordCommand implements Command {
                     DateConverterFactory.getConverter().convert(request[2]));
             return null;
         } catch (DaoException e) {
-            throw new CommandException("Error while adding record " + request[3] + ' ' + request[1], e);
+            throw new CommandException("Error while adding record " + request[0] + ' ' + request[1], e);
         } catch (DateConvertionException e) {
             throw new IllegalArgumentException("Error converting date " + request[2]);
         }

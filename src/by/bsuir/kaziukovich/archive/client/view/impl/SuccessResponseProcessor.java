@@ -44,7 +44,7 @@ public class SuccessResponseProcessor implements ResponseProcessor {
     }
 
     public SuccessResponseProcessor() {
-        delimiter = "\n";
+        delimiter = "\n\n";
         successMessage = "[success]";
     }
 }

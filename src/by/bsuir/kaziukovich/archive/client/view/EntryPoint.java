@@ -1,7 +1,5 @@
 package by.bsuir.kaziukovich.archive.client.view;
 
-import by.bsuir.kaziukovich.archive.server.logic.digest.PasswordDigestException;
-import by.bsuir.kaziukovich.archive.server.logic.digest.PasswordDigestGeneratorFactory;
 import by.bsuir.kaziukovich.archive.client.logic.socketsender.SocketSender;
 import by.bsuir.kaziukovich.archive.client.logic.socketsender.SocketSenderException;
 import by.bsuir.kaziukovich.archive.client.logic.socketsender.SocketSenderFactory;
